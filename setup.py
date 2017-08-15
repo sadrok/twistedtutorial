@@ -7,6 +7,8 @@ with open(os.path.join(here, 'README.txt')) as f:
     README = f.read()
 with open(os.path.join(here, 'CHANGES.txt')) as f:
     CHANGES = f.read()
+with open(os.path.join(here, 'VERSION.txt')) as f:
+    VERSION = f.read().strip(' \t\n\r')
 
 requires = [
     'plaster_pastedeploy',
@@ -24,7 +26,7 @@ tests_require = [
 
 setup(
     name='myproject',
-    version='0.0',
+    version=VERSION,
     description='myproject',
     long_description=README + '\n\n' + CHANGES,
     classifiers=[
