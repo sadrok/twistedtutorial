@@ -4,5 +4,10 @@
 <div class="content">
   <h1><span class="font-semi-bold">Pyramid</span> <span class="smaller">Starter project</span></h1>
   <p class="lead">Welcome to <span class="font-normal">{{ project }}</span>, a&nbsp;Pyramid application generated&nbsp;by<br><span class="font-normal">Cookiecutter</span>.</p>
+    <p>You have successfully matched the <code>{{ request.matched_route.name }}</code> route with {% if request.matchdict %} matchdict:</p>
+    <dl>{% for key, value in request.matchdict.items() %}
+        <dt>{{ key }}</dt><dd>{{ value }}</dd>
+        {% endfor %}
+    </dl>{% else %} no matchdict.{% endif %}
 </div>
 {% endblock content %}
