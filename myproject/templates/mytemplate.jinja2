@@ -1,13 +1,23 @@
 {% extends "layout.jinja2" %}
-
 {% block content %}
 <div class="content">
   <h1><span class="font-semi-bold">Pyramid</span> <span class="smaller">Starter project</span></h1>
   <p class="lead">Welcome to <span class="font-normal">{{ project }}</span>, a&nbsp;Pyramid application generated&nbsp;by<br><span class="font-normal">Cookiecutter</span>.</p>
-    <p>You have successfully matched the <code>{{ request.matched_route.name }}</code> route with {% if request.matchdict %} matchdict:</p>
-    <dl>{% for key, value in request.matchdict.items() %}
+    {% if request.matched_route.name == 'home' %}
+        <p>Here a few routes defined. Just click on one and see what happens</p>
+        <dl>
+            <dt>Words</dt><dd><a href="{{ request.route_path('home', 'These are some words') }}">These are some words</a></dd>
+            <dt>Numbers</dt><dd><a href="{{ request.route_path('home', math.pi) }}">{{ math.pi }}   </a></dd>
+            <dt>UUID</dt><dd><a href="{{ request.route_path('home', uuid) }}">{{ uuid }}</a></dd>
+        </dl>
+    {% else %}
+    <p>You have successfully matched the <code>{{ request.matched_route.name }}</code> route with {% if matchdict %} matchdict:</p>
+    <dl>{% for key, value in matchdict.items() %}
         <dt>{{ key }}</dt><dd>{{ value }}</dd>
         {% endfor %}
     </dl>{% else %} no matchdict.{% endif %}
+        <a href="{{ request.route_path('home') }}">Back to Home</a>
+    {% endif %}
+    <p>You've been here {{ counter }} times</p>
 </div>
 {% endblock content %}
